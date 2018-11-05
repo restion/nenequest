@@ -1,0 +1,76 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Nene Quest</title>
+  <script type="application/javascript" src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+  <script type="application/javascript" src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+  
+</head>
+
+<body>
+<div id="content"></div>
+<script>
+var timer=0;
+const rootElement = document.getElementById('content');
+const rce = React.createElement;
+/*
+function inc(){
+	timer++;
+}
+setInterval(inc,17);
+*/
+class App extends React.Component {
+   constructor(props) {
+     super(props);
+this.state = {
+  seconds: '00', 
+  minutes: ''
+}
+this.secondsRemaining=0; 
+this.intervalHandle;
+
+this.handleChange = this.handleChange.bind(this);
+// method that triggers the countdown functionality
+this.startCountDown = this.startCountDown.bind(this);
+this.tick = this.tick.bind(this);
+this.startCountDown();
+}
+handleChange(event) {
+  this.setState({
+   minutes: event.target.value
+  })
+}
+tick() {
+
+var sec = this.secondsRemaining++;
+this.setState({
+  
+  seconds: sec
+})
+
+}
+startCountDown() {
+this.intervalHandle = setInterval(this.tick, 17);
+let time = this.state.minutes;
+//this.secondsRemaining = time * 60;
+}
+render() {
+      return (
+       rce('div',null,
+        this.state.seconds) 
+       
+     );
+   }
+ }
+ 
+ ReactDOM.render(
+      React.createElement(App),
+      rootElement
+    )
+</script>
+
+</body>
+</html>
